@@ -54,9 +54,16 @@ namespace ToDo
                 // Show current taks
                 ShowMenuTaskList();
                 
-                string line = Console.ReadLine();
+                string taskNumberToRemove = Console.ReadLine();
                 // Remove one position
-                int indexToRemove = Convert.ToInt32(line) - 1;
+                int indexToRemove = Convert.ToInt32(taskNumberToRemove) - 1;
+
+                if (indexToRemove > (TaskList.Count - 1) || indexToRemove < 0)
+                {
+                    Console.WriteLine("Numero de tarea seleccionado no es valido");
+                    return;
+                }
+
                 if (indexToRemove > -1 && TaskList.Count > 0)
                 {
                     string taskItem = TaskList[indexToRemove];
@@ -66,6 +73,7 @@ namespace ToDo
             }
             catch (Exception)
             {
+                Console.WriteLine("Ha ocurrido un error al eliminar la tarea");
             }
         }
 
@@ -80,6 +88,7 @@ namespace ToDo
             }
             catch (Exception)
             {
+                Console.WriteLine("Ha ocurrido un error al añadir la tarea");
             }
         }
 
