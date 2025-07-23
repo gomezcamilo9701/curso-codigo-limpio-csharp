@@ -24,7 +24,7 @@ namespace ToDo
                 }
                 else if (selectedMenu == (int)MenuOptionEnum.MenuShowList)
                 {
-                    ShowEmptyMenu();
+                    ShowMenuTaskList();
                 }
             } while (selectedMenu != (int)MenuOptionEnum.MenuExit);
         }
@@ -57,14 +57,11 @@ namespace ToDo
                 string line = Console.ReadLine();
                 // Remove one position
                 int indexToRemove = Convert.ToInt32(line) - 1;
-                if (indexToRemove > -1)
+                if (indexToRemove > -1 && TaskList.Count > 0)
                 {
-                    if (TaskList.Count > 0)
-                    {
-                        string taskItem = TaskList[indexToRemove];
-                        TaskList.RemoveAt(indexToRemove);
-                        Console.WriteLine("Tarea " + taskItem + " eliminada");
-                    }
+                    string taskItem = TaskList[indexToRemove];
+                    TaskList.RemoveAt(indexToRemove);
+                    Console.WriteLine("Tarea " + taskItem + " eliminada");
                 }
             }
             catch (Exception)
@@ -101,10 +98,8 @@ namespace ToDo
         public static void ShowMenu()
         {
             Console.WriteLine("----------------------------------------");
-            for (int i = 0; i < TaskList.Count; i++)
-            {
-                Console.WriteLine((i + 1) + ". " + TaskList[i]);
-            }
+            var indexTask = 0;
+            TaskList.ForEach(t => Console.WriteLine(++indexTask + ". " + t));
             Console.WriteLine("----------------------------------------");
         }
     }
